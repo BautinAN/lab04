@@ -1,0 +1,1 @@
+Test.exe < input.txt > actual.txt 2>NUL

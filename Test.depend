@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1614175609 source:d:\МЭИ\2 семестр\test\main.cpp
+	<iostream>
+	<conio.h>
+	<math.h>
+	<string.h>
+	<windows.h>
+	<vector>
+	<stdio.h>
+	<stdlib.h>
+	<cstdlib>
+
+1622391385 source:c:\users\mainuser\desktop\test\main.cpp
+	<iostream>
+	<conio.h>
+	<math.h>
+	<string.h>
+	<windows.h>
+	<vector>
+	<stdio.h>
+	<stdlib.h>
+	<cstdlib>
+
