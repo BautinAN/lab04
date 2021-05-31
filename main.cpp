@@ -75,11 +75,11 @@ int main()
         {
             if (bins[j] < 10)
             {
-                cout << " ";
-            }
-            if ((bins[j] < 100) && (bins[j]>10))
-            {
                 cout << "  ";
+            }
+            if ((bins[j] < 100) && (bins[j]>9))
+            {
+                cout << " ";
             }
             cout << bins[j] << "|";
             k=0;
@@ -93,15 +93,11 @@ int main()
             z=1;
             while (z < C)
             {
-                if (max < 9)
+                if ((max_count < 100) && (max_count > 76))
                 {
                     cout << "  ";
                 }
-                if ((max < 100) && (max>9))
-                {
-                    cout << " ";
-                }
-                if (max > 100)
+                if (max_count > 100)
                 {
                     cout << "   ";
                 }
@@ -136,18 +132,18 @@ int main()
             z=1;
             while (z < C)
             {
-            cout << "  ";
-            cout << "|";
-            k=0;
-            while (k != bins[j])
-            {
-                cout << "*";
-                k++;
+                cout << "  ";
+                cout << "|";
+                k=0;
+                while (k != bins[j])
+                {
+                    cout << "*";
+                    k++;
+                }
+                z=z+1.0;
+                cout << "\n";
             }
-            z=z+1.0;
-            cout << "\n";
         }
-    }
     }
     else
     {
