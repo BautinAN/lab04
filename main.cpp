@@ -25,7 +25,7 @@ int main()
     }
     cerr << "Enter bin count: ";
     cin >> bin_count;
-    cout << "Enter high: ";
+    cerr << "Enter high: ";
     cin >> H;
     K=bin_count;
     vector<size_t> bins(bin_count);
@@ -93,11 +93,11 @@ int main()
             z=1;
             while (z < C)
             {
-                if (max < 10)
+                if (max < 9)
                 {
                     cout << "  ";
                 }
-                if ((max < 100) && (max>10))
+                if ((max < 100) && (max>9))
                 {
                     cout << " ";
                 }
@@ -117,7 +117,7 @@ int main()
             }
         }
     }
-    else if (max > 10)
+    if (max_count > 9)
     {
         for (size_t j=0; j < bin_count; j++)
         {
