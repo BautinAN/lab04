@@ -173,6 +173,6 @@ int main()
             }
         }
     }
-    getch();
+    //getch();
     return 0;
 }
