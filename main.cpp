@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
     size_t number_count, bin_count;
-    size_t k=0,C,z;
+    size_t k=0,C,z=0;
     int n,H,K;
     float bin_razrydi[100];
     cerr << "Enter number count: ";
@@ -67,112 +67,55 @@ int main()
         if (bins[j]>max_count) max_count=bins[j];
     }
     C=H/K;
-
-
-    if (max_count > 76)
+    size_t  height;
+    for (size_t j=0; j < bin_count; j++)
     {
-        for (size_t j=0; j < bin_count; j++)
+        while (z < C)
         {
-            if (bins[j] < 10)
-            {
-                cout << "  ";
-            }
-            if ((bins[j] < 100) && (bins[j]>9))
+            if (bins[j] < 100)
             {
                 cout << " ";
             }
-            cout << bins[j] << "|";
+            if (bins[j] <10)
+            {
+                cout << " ";
+            }
+            if (z == 0)
+            {
+                cout << bins[j];
+            }
+            if (z > 0)
+            {
+                if (bins[j] >= 100)
+                {
+                    cout << "  " << " ";
+                }
+                if ((bins[j] < 100) && (bins[j] > 9))
+                {
+                    cout << "  ";
+                }
+                if (bins[j] < 10)
+                {
+                    cout << " ";
+                }
+            }
+            cout << "|";
+
+            height = bins[j];
+            if (max_count > 76)
+            {
+                height = 76 * (static_cast<double>(bins[j])/max_count);
+            }
             k=0;
-            size_t height = 76 * (static_cast<double>(bins[j])/max_count);
-            while ((k != height) && (k < height))
+            while (k != height)
             {
                 cout << "*";
                 k=k+1.0;
             }
-            cout << "\n";
-            z=1;
-            while (z < C)
-            {
-                if ((max_count < 100) && (max_count > 76))
-                {
-                    cout << "  ";
-                }
-                if (max_count > 100)
-                {
-                    cout << "   ";
-                }
-                cout << "|";
-                k=0;
-                while ((k != height) && (k < height))
-                {
-                    cout << "*";
-                    k=k+1.0;
-                }
-                z=z+1.0;
-                cout << "\n";
-            }
+            cout  << "\n";
+            z=z+1.0;
         }
+        z=0;
     }
-    if (max_count > 9)
-    {
-        for (size_t j=0; j < bin_count; j++)
-        {
-            if (bins[j] < 10)
-            {
-                cout << " ";
-            }
-            cout << bins[j] << "|";
-            k=0;
-            while (k != bins[j])
-            {
-                cout << "*";
-                k++;
-            }
-            cout << "\n";
-            z=1;
-            while (z < C)
-            {
-                cout << "  ";
-                cout << "|";
-                k=0;
-                while (k != bins[j])
-                {
-                    cout << "*";
-                    k++;
-                }
-                z=z+1.0;
-                cout << "\n";
-            }
-        }
-    }
-    else
-    {
-        for (size_t j=0; j<bin_count; j++)
-        {
-            cout << bins[j] << "|";
-            k=0;
-            while (k != bins[j])
-            {
-                cout << "*";
-                k++;
-            }
-            cout << "\n";
-            z=1;
-            while (z < C)
-            {
-                cout << " ";
-                cout << "|";
-                k=0;
-                while (k != bins[j])
-                {
-                    cout << "*";
-                    k++;
-                }
-                z=z+1.0;
-                cout << "\n";
-            }
-        }
-    }
-    //getch();
     return 0;
 }
