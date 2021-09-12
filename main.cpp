@@ -9,28 +9,20 @@
 #include <cstdlib>
 using namespace std;
 
-int main()
+vector<double>
+input_numbers(size_t count)
 {
-    size_t number_count, bin_count;
-    size_t k=0,C,z=0;
-    int n,H,K;
-    float bin_razrydi[100];
-    cerr << "Enter number count: ";
-    cin >> number_count;
-    vector<double> numbers(number_count);
-    cerr << "Enter numbers: ";
-    for (size_t i=0; i < number_count; i++)
+    vector<double> result(count);
+    for (size_t i = 0; i < count; i++)
     {
-        cin >> numbers[i];
+        cin >> result[i];
     }
-    cerr << "Enter bin count: ";
-    cin >> bin_count;
-    cerr << "Enter high: ";
-    cin >> H;
-    K=bin_count;
-    vector<size_t> bins(bin_count);
-    double min = numbers[0];
-    double max = numbers[0];
+    return result;
+}
+
+void
+find_minmax(const vector<double>& numbers, double& min, double& max)
+{
     for (double x : numbers)
     {
         if (x < min)
@@ -42,6 +34,11 @@ int main()
             max = x;
         }
     }
+}
+
+void
+make_histogram(const vector<double>& numbers,size_t bin_count, size_t number_count, double& min, double& max, vector<size_t>& bins)
+{
     double bin_size = (max-min)/bin_count;
     for (size_t i = 0; i < number_count; i++)
     {
@@ -60,7 +57,16 @@ int main()
         {
             bins[bin_count-1]++;
         }
+
     }
+}
+
+
+void
+show_histogram_text(vector<size_t>& bins, size_t bin_count, int H)
+{
+    size_t C, k=0, z=0;
+    int K=bin_count;
     double max_count=bins[0];
     for (size_t j=1; j< bin_count; j++)
     {
@@ -117,5 +123,31 @@ int main()
         }
         z=0;
     }
+
+}
+
+
+int main()
+{
+    size_t number_count, bin_count;
+    int n,H;
+    float bin_razrydi[100];
+    cerr << "Enter number count: ";
+    cin >> number_count;
+    cerr << "Enter numbers: ";
+    const auto numbers = input_numbers(number_count);
+    cerr << "Enter bin count: ";
+    cin >> bin_count;
+    cerr << "Enter high: ";
+    cin >> H;
+    vector<size_t> bins(bin_count);
+    double min = numbers[0];
+    double max = numbers[0];
+    find_minmax(numbers, min, max);
+    make_histogram(numbers, bin_count, number_count, min, max, bins);
+    show_histogram_text(bins, bin_count, H);
+
+
     return 0;
 }
+
