@@ -1,4 +1,4 @@
-#include "histogram.h"
+#include "histogram.h.h"
 
 #include <cassert>
 
@@ -21,7 +21,6 @@ test_negative() {
     assert(max == -1);
 }
 
-
 void
 test_same() {
     double min = 0;
@@ -30,7 +29,6 @@ test_same() {
     assert(min == 1);
     assert(max == 1);
 }
-
 
 void
 test_one() {
@@ -41,11 +39,21 @@ test_one() {
     assert(max == 1);
 }
 
+void
+test_emptiness() {
+    double min = 0;
+    double max = 0;
+    find_minmax({}, min, max);
+    assert(min == 0);
+    assert(max == 0);
+}
+
 
 int
 main() {
     test_positive();
-    test_negative();
-    test_same();
-    test_one();
+test_negative();
+test_same();
+test_one();
+test_emptiness();
 }

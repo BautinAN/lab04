@@ -32,17 +32,12 @@
 	<stdlib.h>
 	<cstdlib>
 
-1632162666 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\main.cpp
+1633294272 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\main.cpp
 	<iostream>
-	"histogram.h.h"
+	"histogram.h..h"
 	<math.h>
-	<conio.h>
 	<string>
-	<windows.h>
 	<vector>
-	<stdio.h>
-	<stdlib.h>
-	<cstdlib>
 
 1632158126 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h.h
 	<iostream>
@@ -55,15 +50,16 @@
 	<stdlib.h>
 	<cstdlib>
 
-1632163075 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.cpp
-	"histogram.h.h"
+1633348687 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.cpp
+	"histogram.h..h"
 	<iostream>
-	<conio.h>
 	<math.h>
 	<string>
-	<windows.h>
 	<vector>
-	<stdio.h>
-	<stdlib.h>
-	<cstdlib>
+
+1633295515 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h..h
+	<iostream>
+	<math.h>
+	<string>
+	<vector>
 

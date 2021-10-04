@@ -1,82 +1,102 @@
-#include "histogram.h.h"
+#include "histogram.h..h"
 #include <iostream>
-#include <conio.h>
 #include <math.h>
 #include <string>
-#include <windows.h>
 #include <vector>
-#include <stdio.h>
-#include <stdlib.h>
-#include <cstdlib>
+
 using namespace std;
 
+
 vector<double>
-input_numbers(size_t count)
+input_numbers(istream& in, size_t count)
 {
     vector<double> result(count);
     for (size_t i = 0; i < count; i++)
     {
-        cin >> result[i];
+        in >> result[i];
     }
     return result;
 }
 
-void
-find_minmax(const vector<double>& numbers, double& min, double& max)
-{
-    for (double x : numbers)
-    {
-        if (x < min)
-        {
-            min = x;
-        }
-        else if (x > max)
-        {
-            max = x;
-        }
-    }
+Input
+read_input(istream& in, bool prompt) {
+    Input data;
+
+    cerr << "Enter number count: ";
+    size_t number_count;
+    in >> number_count;
+
+    cerr << "Enter numbers: ";
+    data.numbers = input_numbers(in, number_count);
+
+    cerr << "Enter bin count: ";
+    size_t bin_count;
+    in >> bin_count;
+
+    cerr << "Enter high: ";
+    size_t H;
+    in >> H;
+
+    return data;
 }
 
-vector<size_t>
-make_histogram(const vector<double>& numbers,size_t bin_count, size_t number_count, double& min, double& max)
-{   vector<size_t> result(bin_count);
-    double bin_size = (max-min)/bin_count;
-    for (size_t i = 0; i < number_count; i++)
+void find_minmax (const vector <double>& numbers, double& min, double& max) {
+
+    if(numbers.size() != 0 ) {
+
+    min = numbers[0];
+    max = numbers[0];
+    for (double x : numbers)
+    {
+        if (x < min) min=x;
+        if (x> max) max=x;
+    } }
+    return;
+}
+
+vector <size_t> make_histogram(Input input)
+{
+
+    double max = 0;
+    double min = 0;
+    find_minmax(input.numbers, min, max);
+    vector<size_t> bins(input.bin_count);
+    double bin_size = (max-min)/input.bin_count;
+    for (double x : input.numbers)
     {
         bool found = false;
-        for (size_t j = 0; (j < bin_count - 1) && !found; j++)
+        for (size_t j = 0; (j < input.bin_count - 1) && !found; j++)
         {
             auto lo = min + j * bin_size;
             auto hi = min + (j + 1) * bin_size;
-            if ((lo <= numbers[i]) && (numbers[i] < hi))
+            if ((lo <= x) && (x < hi))
             {
-                result[j]++;
+                bins[j]++;
                 found = true;
             }
         }
         if (!found)
         {
-            result[bin_count-1]++;
+            bins[input.bin_count-1]++;
         }
-
     }
-    return result;
+    return bins;
 }
 
 
 void
-show_histogram_text(vector<size_t>& bins, size_t bin_count, int H)
+show_histogram_text(vector<size_t>& bins,Input input)
 {
     size_t C, k=0, z=0;
-    int K=bin_count;
+    size_t K=input.bin_count;
     double max_count=bins[0];
-    for (size_t j=1; j< bin_count; j++)
+    for (size_t j=1; j< input.bin_count; j++)
     {
         if (bins[j]>max_count) max_count=bins[j];
     }
-    C=H/K;
+    C=input.H/K;
     size_t  height;
-    for (size_t j=0; j < bin_count; j++)
+    for (size_t j=0; j < input.bin_count; j++)
     {
         while (z < C)
         {
@@ -125,7 +145,7 @@ show_histogram_text(vector<size_t>& bins, size_t bin_count, int H)
         }
         z=0;
     }
-
+return;
 }
 
 
@@ -159,7 +179,7 @@ void svg_rect(double x, double y, double width, double height, string stroke, st
 }
 
 void
-show_histogram_svg(const vector<size_t>& bins, int H, size_t bin_count) {
+show_histogram_svg(const vector<size_t>& bins,Input input) {
     const auto IMAGE_WIDTH = 400;
     const auto IMAGE_HEIGHT = 700;
     const auto TEXT_LEFT = 20;
@@ -167,7 +187,7 @@ show_histogram_svg(const vector<size_t>& bins, int H, size_t bin_count) {
     const auto TEXT_WIDTH = 50;
     double BLOCK_WIDTH = 10;
     double max_count=bins[0];
-    for (size_t j=1; j< bin_count; j++)
+    for (size_t j=1; j< input.bin_count; j++)
     {
         if (bins[j] > max_count) max_count=bins[j];
     }
@@ -175,14 +195,14 @@ show_histogram_svg(const vector<size_t>& bins, int H, size_t bin_count) {
     svg_begin(IMAGE_WIDTH, IMAGE_HEIGHT);
     svg_text(TEXT_LEFT, TEXT_BASELINE, to_string(bins[0]));
     double top = 0;
-    if( H < TEXT_BASELINE) H=TEXT_BASELINE;
-    if( (H*bin_count) > IMAGE_HEIGHT) H = (IMAGE_HEIGHT / bin_count);
+    if( input.H < TEXT_BASELINE) input.H=TEXT_BASELINE;
+    if( (input.H*input.bin_count) > IMAGE_HEIGHT) input.H = (IMAGE_HEIGHT / input.bin_count);
 for (size_t bin : bins) {
 
     const double bin_width = BLOCK_WIDTH * bin;
     svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
-    svg_rect(TEXT_WIDTH, top, bin_width, H);
-    top += H;
+    svg_rect(TEXT_WIDTH, top, bin_width, input.H);
+    top += input.H;
 }
     svg_end();
 }
