@@ -3,6 +3,8 @@
 #include <math.h>
 #include <string>
 #include <vector>
+#include <curl/curl.h>
+
 
 using namespace std;
 
@@ -22,18 +24,19 @@ Input
 read_input(istream& in, bool prompt) {
     Input data;
 
-    cerr << "Enter number count: ";
+    if (prompt) {cerr << "Enter number count: "; }
     size_t number_count;
     in >> number_count;
 
-    cerr << "Enter numbers: ";
+    if (prompt) {cerr << "Enter numbers: ";}
     data.numbers = input_numbers(in, number_count);
 
-    cerr << "Enter bin count: ";
+    if (prompt) {cerr << "Enter bin count: ";}
     size_t bin_count;
     in >> bin_count;
+    data.bin_count=bin_count;
 
-    cerr << "Enter high: ";
+    if (prompt) {cerr << "Enter high: ";}
     size_t H;
     in >> H;
 

@@ -32,12 +32,13 @@
 	<stdlib.h>
 	<cstdlib>
 
-1633294272 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\main.cpp
+1633358820 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\main.cpp
 	<iostream>
 	"histogram.h..h"
 	<math.h>
 	<string>
 	<vector>
+	<curl/curl.h>
 
 1632158126 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h.h
 	<iostream>
@@ -50,16 +51,60 @@
 	<stdlib.h>
 	<cstdlib>
 
-1633348687 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.cpp
+1633359206 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.cpp
 	"histogram.h..h"
 	<iostream>
 	<math.h>
 	<string>
 	<vector>
+	<curl/curl.h>
 
-1633295515 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h..h
+1633359206 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h..h
 	<iostream>
 	<math.h>
 	<string>
 	<vector>
+	<curl/curl.h>
+
+1631385976 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\curl.h
+	"curlver.h"
+	"system.h"
+	<stdio.h>
+	<limits.h>
+	<osreldate.h>
+	<sys/types.h>
+	<time.h>
+	<winsock2.h>
+	<ws2tcpip.h>
+	<sys/select.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<support/SupportDefs.h>
+	"easy.h"
+	"multi.h"
+	"urlapi.h"
+	"options.h"
+	"typecheck-gcc.h"
+
+1632280276 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\curlver.h
+
+1629660186 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\system.h
+	<winsock2.h>
+	<windows.h>
+	<ws2tcpip.h>
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/poll.h>
+
+1629660186 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\easy.h
+
+1629660186 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\multi.h
+	"curl.h"
+
+1630640778 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\urlapi.h
+	"curl.h"
+
+1629660186 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\options.h
+
+1630640778 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\typecheck-gcc.h
 
