@@ -32,13 +32,14 @@
 	<stdlib.h>
 	<cstdlib>
 
-1633358820 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\main.cpp
+1633373406 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\main.cpp
 	<iostream>
 	"histogram.h..h"
 	<math.h>
 	<string>
 	<vector>
 	<curl/curl.h>
+	<sstream>
 
 1632158126 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h.h
 	<iostream>
@@ -51,20 +52,23 @@
 	<stdlib.h>
 	<cstdlib>
 
-1633359206 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.cpp
+1633375727 source:d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.cpp
 	"histogram.h..h"
 	<iostream>
 	<math.h>
 	<string>
 	<vector>
 	<curl/curl.h>
+	<sstream>
+	<windows.h>
 
-1633359206 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h..h
+1633373317 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\histogram.h..h
 	<iostream>
 	<math.h>
 	<string>
 	<vector>
 	<curl/curl.h>
+	<windows.h>
 
 1631385976 d:\МЭИ\1 курс\2 семестр\Прога\Лаба 3\lab01\curl\include\curl\curl.h
 	"curlver.h"

@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <curl/curl.h>
-
+#include <windows.h>
 
 using namespace std;
 
@@ -40,10 +40,18 @@ svg_end();
 void
 svg_text(double left, double baseline, string text);
 
-void svg_rect(double x, double y, double width, double height, string stroke ="indigo", string fill = "lawngreen");
+string
+make_info_text();
+
+void
+svg_rect(double x, double y, double width, double height, ostream& out, string stroke ="indigo", string fill = "lawngreen");
+
+size_t
+write_data(void* items, size_t item_size, size_t item_count, void* ctx);
 
 void
 show_histogram_svg(const vector<size_t>& bins,Input input);
 
-
+Input
+download(const string& address);
 #endif // HISTOGRAM_H__H_INCLUDED

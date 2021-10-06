@@ -1,3 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <svg width='400' height='700' viewBox='0 0 400 700' xmlns='http://www.w3.org/2000/svg'>
-<text x='20' y='20'> 9</text><text x='20' y='20'> 9</text><rect x='50' y='0' width='31.5' height='233' stroke='indigo' fill='lawngreen'/><text x='20' y='253'> 33</text><rect x='50' y='233' width='115.5' height='233' stroke='indigo' fill='lawngreen'/><text x='20' y='486'> 100</text><rect x='50' y='466' width='350' height='233' stroke='indigo' fill='lawngreen'/></svg>
+<text x='20' y='20'> 9</text><text x='20' y='20'> 9</text><rect x='50' y='0' width='31.5' height='226' stroke='indigo' fill='lawngreen'/><text x='20' y='246'> 33</text><rect x='50' y='226' width='115.5' height='226' stroke='indigo' fill='lawngreen'/><text x='20' y='472'> 100</text><rect x='50' y='452' width='350' height='226' stroke='indigo' fill='lawngreen'/><text x='0' y='698'> Windows: 6.2 (build 9200)
+Computer name: PC</text></svg>

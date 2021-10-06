@@ -13,7 +13,12 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="D:/МЭИ/1 курс/2 семестр/Прога/Лаба 3/lab01/curl/include" />
 				</Compiler>
+				<Linker>
+					<Add library="libcurl.dll.a" />
+					<Add directory="D:/МЭИ/1 курс/2 семестр/Прога/Лаба 3/lab01/curl/lib" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Test" prefix_auto="1" extension_auto="1" />
@@ -32,6 +37,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename=".gitignore" />
 		<Unit filename="histogram.cpp" />
 		<Unit filename="histogram.h..h">
 			<Option target="&lt;{~None~}&gt;" />

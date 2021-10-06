@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include <curl/curl.h>
-
+#include <sstream>
+#include <windows.h>
 
 using namespace std;
 
@@ -21,39 +22,55 @@ input_numbers(istream& in, size_t count)
 }
 
 Input
-read_input(istream& in, bool prompt) {
+read_input(istream& in, bool prompt)
+{
     Input data;
 
-    if (prompt) {cerr << "Enter number count: "; }
+    if (prompt)
+    {
+        cerr << "Enter number count: ";
+    }
     size_t number_count;
     in >> number_count;
 
-    if (prompt) {cerr << "Enter numbers: ";}
+    if (prompt)
+    {
+        cerr << "Enter numbers: ";
+    }
     data.numbers = input_numbers(in, number_count);
 
-    if (prompt) {cerr << "Enter bin count: ";}
+    if (prompt)
+    {
+        cerr << "Enter bin count: ";
+    }
     size_t bin_count;
     in >> bin_count;
     data.bin_count=bin_count;
 
-    if (prompt) {cerr << "Enter high: ";}
+    if (prompt)
+    {
+        cerr << "Enter high: ";
+    }
     size_t H;
     in >> H;
 
     return data;
 }
 
-void find_minmax (const vector <double>& numbers, double& min, double& max) {
+void find_minmax (const vector <double>& numbers, double& min, double& max)
+{
 
-    if(numbers.size() != 0 ) {
-
-    min = numbers[0];
-    max = numbers[0];
-    for (double x : numbers)
+    if(numbers.size() != 0 )
     {
-        if (x < min) min=x;
-        if (x> max) max=x;
-    } }
+
+        min = numbers[0];
+        max = numbers[0];
+        for (double x : numbers)
+        {
+            if (x < min) min=x;
+            if (x> max) max=x;
+        }
+    }
     return;
 }
 
@@ -148,13 +165,14 @@ show_histogram_text(vector<size_t>& bins,Input input)
         }
         z=0;
     }
-return;
+    return;
 }
 
 
 
 void
-svg_begin(double width, double height) {
+svg_begin(double width, double height)
+{
     cout << "<?xml version='1.0' encoding='UTF-8'?>\n";
     cout << "<svg ";
     cout << "width='" << width << "' ";
@@ -164,25 +182,58 @@ svg_begin(double width, double height) {
 }
 
 void
-svg_end() {
+svg_end()
+{
     cout << "</svg>\n";
 }
 
 
 void
-svg_text(double left, double baseline, string text) {
-     cout << "<text x='" << left << "' y='" << baseline << "'> " << text << "</text>";
+svg_text(double left, double baseline, string text)
+{
+    cout << "<text x='" << left << "' y='" << baseline << "'> " << text << "</text>";
 }
 
+string make_info_text() {
+stringstream buffer;
+long unsigned int info;
+DWORD mask = 0x0000ffff;
+info = GetVersion();
+DWORD platform = info >> 16;
+DWORD version = info & mask;
+DWORD maskk = 0x00ff;
+DWORD version_major = maskk & version;
+DWORD version_minor = version >> 8;
+if (info & 0x80000000 == 0)
+{
 
 
-void svg_rect(double x, double y, double width, double height, string stroke, string fill)
+}
+buffer << "Windows: " << version_major << "." << version_minor << " (build " << platform << ")" << "\n";
+DWORD numer = 256;
+LPDWORD pointer = &numer;
+char lpBuffer[numer];
+GetComputerNameA(lpBuffer,pointer);
+buffer << "Computer name: " << lpBuffer;
+return buffer.str();
+}
+
+void svg_rect(double x, double y, double width, double height, ostream& out, string stroke, string fill)
 {
     cout << "<rect x='" << x <<"' y='" << y << "' width='" << width << "' height='" << height << "' stroke='" << stroke << "' fill='" << fill <<"'/>";
 }
 
+size_t write_data(void* items, size_t item_size, size_t item_count, void* ctx)
+{
+    size_t data_size = sizeof(items, item_size, item_count, ctx);
+    stringstream* buffer = reinterpret_cast<stringstream*>(ctx);
+    buffer->write(reinterpret_cast <const char*> (items), data_size);
+    return 0;
+}
+
 void
-show_histogram_svg(const vector<size_t>& bins,Input input) {
+show_histogram_svg(const vector<size_t>& bins,Input input)
+{
     const auto IMAGE_WIDTH = 400;
     const auto IMAGE_HEIGHT = 700;
     const auto TEXT_LEFT = 20;
@@ -199,13 +250,52 @@ show_histogram_svg(const vector<size_t>& bins,Input input) {
     svg_text(TEXT_LEFT, TEXT_BASELINE, to_string(bins[0]));
     double top = 0;
     if( input.H < TEXT_BASELINE) input.H=TEXT_BASELINE;
-    if( (input.H*input.bin_count) > IMAGE_HEIGHT) input.H = (IMAGE_HEIGHT / input.bin_count);
-for (size_t bin : bins) {
+    if( (input.H*input.bin_count) > IMAGE_HEIGHT) input.H = ((IMAGE_HEIGHT-TEXT_BASELINE) / input.bin_count);
+    for (size_t bin : bins)
+    {
 
-    const double bin_width = BLOCK_WIDTH * bin;
-    svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
-    svg_rect(TEXT_WIDTH, top, bin_width, input.H);
-    top += input.H;
-}
+        const double bin_width = BLOCK_WIDTH * bin;
+        svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
+        svg_rect(TEXT_WIDTH, top, bin_width, input.H, cout);
+        top += input.H;
+    }
+    svg_text(0,top + TEXT_BASELINE,make_info_text());
     svg_end();
+}
+
+
+
+Input
+download(const string& address)
+{
+    stringstream buffer;
+
+    CURL *curl = curl_easy_init();
+    if(curl)
+    {
+        CURLcode res;
+        curl_easy_setopt(curl, CURLOPT_URL, address.c_str());
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
+        curl_easy_setopt(curl, CURLOPT_URL, write_data);
+        res = curl_easy_perform(curl);
+
+if(!res) {
+    curl_off_t speed;
+    res = curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD_T, &speed);
+    if(!res) {
+     // printf("Upload speed %" CURL_FORMAT_CURL_OFF_T " bytes/sec\n", speed);
+      cerr << "Download speed "<< CURL_FORMAT_CURL_OFF_T<< " bytes/sec\n" << speed;
+    }
+  }
+  curl_easy_cleanup(curl);
+
+
+        if (curl_easy_strerror(res) != "CURLE_OK")
+        {
+            cout << curl_easy_strerror(res);
+            exit(1);
+        }
+    }
+    curl_global_init(CURL_GLOBAL_ALL);
+    return read_input(buffer, false);
 }
