@@ -194,28 +194,25 @@ svg_text(double left, double baseline, string text)
     cout << "<text x='" << left << "' y='" << baseline << "'> " << text << "</text>";
 }
 
-string make_info_text() {
-stringstream buffer;
-long unsigned int info;
-DWORD mask = 0x0000ffff;
-info = GetVersion();
-DWORD platform = info >> 16;
-DWORD version = info & mask;
-DWORD maskk = 0x00ff;
-DWORD version_major = maskk & version;
-DWORD version_minor = version >> 8;
-if (info & 0x80000000 == 0)
+string make_info_text()
 {
+    stringstream buffer;
+    long unsigned int info;
+    DWORD mask = 0x0000ffff;
+    info = GetVersion();
+    DWORD platform = info >> 16;
+    DWORD version = info & mask;
+    DWORD maskk = 0x00ff;
+    DWORD version_major = maskk & version;
+    DWORD version_minor = version >> 8;
 
-
-}
-buffer << "Windows: " << version_major << "." << version_minor << " (build " << platform << ")" << "\n";
-DWORD numer = 256;
-LPDWORD pointer = &numer;
-char lpBuffer[numer];
-GetComputerNameA(lpBuffer,pointer);
-buffer << "Computer name: " << lpBuffer;
-return buffer.str();
+    buffer << "Windows: " << version_major << "." << version_minor << " (build " << platform << ")" << "\n";
+    DWORD numer = 256;
+    LPDWORD pointer = &numer;
+    char lpBuffer[numer];
+    GetComputerNameA(lpBuffer,pointer);
+    buffer << "Computer name: " << lpBuffer;
+    return buffer.str();
 }
 
 void svg_rect(double x, double y, double width, double height, ostream& out, string stroke, string fill)
@@ -278,24 +275,20 @@ download(const string& address)
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buffer);
         curl_easy_setopt(curl, CURLOPT_URL, write_data);
         res = curl_easy_perform(curl);
-
-if(!res) {
-    curl_off_t speed;
-    res = curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD_T, &speed);
-    if(!res) {
-     // printf("Upload speed %" CURL_FORMAT_CURL_OFF_T " bytes/sec\n", speed);
-      cerr << "Download speed "<< CURL_FORMAT_CURL_OFF_T<< " bytes/sec\n" << speed;
-    }
-  }
-  curl_easy_cleanup(curl);
+        curl_off_t speed;
 
 
         if (curl_easy_strerror(res) != "CURLE_OK")
         {
-            cout << curl_easy_strerror(res);
+            cout << curl_easy_strerror(res) << "\n";
             exit(1);
+
         }
+
+        res = curl_easy_getinfo(curl, CURLINFO_SPEED_DOWNLOAD_T, &speed);
+        cout << "Download speed "<< speed << " bytes/sec\n";
     }
+    curl_easy_cleanup(curl);
     curl_global_init(CURL_GLOBAL_ALL);
     return read_input(buffer, false);
 }
